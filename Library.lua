@@ -3229,7 +3229,7 @@ function Library:CreateWindow(...)
                 BorderMode = Enum.BorderMode.Inset;
                 Size = UDim2.new(1, 0, 0, 507 + 2);
                 ZIndex = 2;
-                Parent = Info.Side == 1 and LeftSide or RightSide;
+                Parent = ParentSide;
             });
 
             Library:AddToRegistry(BoxOuter, {
@@ -3310,31 +3310,30 @@ function Library:CreateWindow(...)
             return Groupbox;
         end;
 
-        function Tab:AddLeftGroupbox(Name)
-            return Tab:AddGroupbox({ Side = 1; Name = Name; });
-        end;
-
-        function Tab:AddMiddleGroupbox(Name)
-            return Tab:AddGroupbox({ Side = 2; Name = Name; });
-        end;
-
-        function Tab:AddRightGroupbox(Name)
-            return Tab:AddGroupbox({ Side = 3; Name = Name; });
-        end;
-
         function Tab:AddTabbox(Info)
-            local Tabbox = {
-                Tabs = {};
-            };
+            local Side = Info.Side or 1;
+            local ParentSide;
 
-            local BoxOuter = Library:Create('Frame', {
-                BackgroundColor3 = Library.BackgroundColor;
-                BorderColor3 = Library.OutlineColor;
-                BorderMode = Enum.BorderMode.Inset;
-                Size = UDim2.new(1, 0, 0, 0);
-                ZIndex = 2;
-                Parent = Info.Side == 1 and LeftSide or RightSide;
-            });
+            if Side == 'Left' or Side == 1 then
+                ParentSide = self.LeftSide;
+            elseif Side == 'Middle' or Side == 2 then
+                ParentSide = self.MiddleSide;
+            elseif Side == 'Right' or Side == 3 then
+                ParentSide = self.RightSide;
+            end
+
+        local Tabbox = {
+            Tabs = {};
+        };
+
+        local BoxOuter = Library:Create('Frame', {
+            BackgroundColor3 = Library.BackgroundColor;
+            BorderColor3 = Library.OutlineColor;
+            BorderMode = Enum.BorderMode.Inset;
+            Size = UDim2.new(1, 0, 0, 0);
+            ZIndex = 2;
+            Parent = ParentSide;
+        });
 
             Library:AddToRegistry(BoxOuter, {
                 BackgroundColor3 = 'BackgroundColor';

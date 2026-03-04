@@ -3124,19 +3124,6 @@ function Library:CreateWindow(...)
             Parent = TabFrame;
         });
 
-        local MiddleSide = Library:Create('ScrollingFrame', {
-            BackgroundTransparency = 1;
-            BorderSizePixel = 0;
-            Position = UDim2.new(1/3, 4, 0, 8 - 1)
-            Size = UDim2.new(1/3, -12 + 2, 0, 507 + 2)
-            CanvasSize = UDim2.new(0, 0, 0, 0);
-            BottomImage = '';
-            TopImage = '';
-            ScrollBarThickness = 0;
-            ZIndex = 2;
-            Parent = TabFrame;
-        });
-
         local RightSide = Library:Create('ScrollingFrame', {
             BackgroundTransparency = 1;
             BorderSizePixel = 0;
@@ -3149,6 +3136,19 @@ function Library:CreateWindow(...)
             ZIndex = 2;
             Parent = TabFrame;
         });
+
+        local MiddleSide = Library:Create('ScrollingFrame', {
+            BackgroundTransparency = 1;
+            BorderSizePixel = 0;
+            Position = UDim2.new(1/3, 4, 0, 8 - 1);
+            Size = UDim2.new(1/3, -12 + 2, 0, 507 + 2);
+            CanvasSize = UDim2.new(0, 0, 0, 0);
+            BottomImage = '';
+            TopImage = '';
+            ScrollBarThickness = 0;
+            ZIndex = 2;
+            Parent = TabFrame;
+        })
 
         Library:Create('UIListLayout', {
             Padding = UDim.new(0, 8);
@@ -3163,7 +3163,7 @@ function Library:CreateWindow(...)
             FillDirection = Enum.FillDirection.Vertical;
             SortOrder = Enum.SortOrder.LayoutOrder;
             HorizontalAlignment = Enum.HorizontalAlignment.Center;
-            Parent = MiddleSide;
+            Parent = RightSide;
         });
 
         Library:Create('UIListLayout', {
@@ -3171,14 +3171,14 @@ function Library:CreateWindow(...)
             FillDirection = Enum.FillDirection.Vertical;
             SortOrder = Enum.SortOrder.LayoutOrder;
             HorizontalAlignment = Enum.HorizontalAlignment.Center;
-            Parent = RightSide;
-        });
+            Parent = MiddleSide
+        })
 
-        for _, Side in next, { LeftSide, RightSide } do
+        for _, Side in next, { LeftSide, MiddleSide, RightSide } do
             Side:WaitForChild('UIListLayout'):GetPropertyChangedSignal('AbsoluteContentSize'):Connect(function()
-                Side.CanvasSize = UDim2.fromOffset(0, Side.UIListLayout.AbsoluteContentSize.Y);
-            end);
-        end;
+            Side.CanvasSize = UDim2.fromOffset(0, Side.UIListLayout.AbsoluteContentSize.Y)
+        end)
+    end;
 
         function Tab:ShowTab()
             for _, Tab in next, Window.Tabs do

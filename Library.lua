@@ -3152,6 +3152,10 @@ function Library:CreateWindow(...)
             Parent = TabFrame;
         })
 
+        Tab.LeftSide = LeftSide;
+        Tab.MiddleSide = MiddleSide;
+        Tab.RightSide = RightSide;
+
         Library:Create('UIListLayout', {
             Padding = UDim.new(0, 8);
             FillDirection = Enum.FillDirection.Vertical;
@@ -3206,6 +3210,10 @@ function Library:CreateWindow(...)
         end;
 
         function Tab:AddGroupbox(Info)
+            local Side = Info.Side or 'Left';
+            local ParentSide = (Side == 'Left' and self.LeftSide) 
+                    or (Side == 'Middle' and self.MiddleSide) 
+                    or (Side == 'Right' and self.RightSide);
             local Groupbox = {};
 
             local BoxOuter = Library:Create('Frame', {

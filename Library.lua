@@ -3210,11 +3210,18 @@ function Library:CreateWindow(...)
         end;
 
         function Tab:AddGroupbox(Info)
-            local Side = Info.Side or 'Left';
-            local ParentSide = (Side == 'Left' and self.LeftSide) 
-                    or (Side == 'Middle' and self.MiddleSide) 
-                    or (Side == 'Right' and self.RightSide);
-            local Groupbox = {};
+            local Side = Info.Side or 1;
+            local ParentSide;
+
+            if Side == 'Left' or Side == 1 then
+                ParentSide = self.LeftSide;
+            elseif Side == 'Middle' or Side == 2 then
+                ParentSide = self.MiddleSide;
+            elseif Side == 'Right' or Side == 3 then
+                ParentSide = self.RightSide;
+            end
+
+        local Groupbox = {};
 
             local BoxOuter = Library:Create('Frame', {
                 BackgroundColor3 = Library.BackgroundColor;
@@ -3507,11 +3514,15 @@ function Library:CreateWindow(...)
         end;
 
         function Tab:AddLeftTabbox(Name)
-            return Tab:AddTabbox({ Name = Name, Side = 1; });
+            return Tab:AddTabbox({ Name = Name, Side = 'Left' });
+        end;
+
+        function Tab:AddMiddleTabbox(Name)
+            return Tab:AddTabbox({ Name = Name, Side = 'Middle' });
         end;
 
         function Tab:AddRightTabbox(Name)
-            return Tab:AddTabbox({ Name = Name, Side = 2; });
+            return Tab:AddTabbox({ Name = Name, Side = 'Right' });
         end;
 
         TabButton.InputBegan:Connect(function(Input)

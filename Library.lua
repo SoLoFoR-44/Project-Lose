@@ -3310,6 +3310,18 @@ function Library:CreateWindow(...)
             return Groupbox;
         end;
 
+        function Tab:AddLeftGroupbox(Name)
+            return Tab:AddGroupbox({ Side = 1; Name = Name; });
+        end;
+
+        function Tab:AddMiddleGroupbox(Name)
+            return Tab:AddGroupbox({ Side = 2; Name = Name; });
+        end;
+
+        function Tab:AddRightGroupbox(Name)
+            return Tab:AddGroupbox({ Side = 3; Name = Name; });
+        end;
+
         function Tab:AddTabbox(Info)
             local Side = Info.Side or 1;
             local ParentSide;

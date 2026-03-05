@@ -2053,10 +2053,13 @@ do
                 DisplayLabel.Text = string.format('%s/%s', Slider.Value .. Suffix, Slider.Max .. Suffix);
             end
 
-            local X = math.ceil(Library:MapValue(Slider.Value, Slider.Min, Slider.Max, 0, Slider.MaxSize));
-            Fill.Size = UDim2.new(0, X, 1, 0);
+            local Percentage = (Slider.Value - Slider.Min) / (Slider.Max - Slider.Min);
 
-            HideBorderRight.Visible = not (X == Slider.MaxSize or X == 0);
+            Fill.Size = UDim2.new(Percentage, 0, 1, 0);
+
+            if HideBorderRight then
+                HideBorderRight.Visible = not (Percentage >= 1 or Percentage <= 0);
+            end
         end;
 
         function Slider:OnChanged(Func)

@@ -1446,7 +1446,7 @@ do
 
             local Inner = Library:Create('Frame', {
                 BackgroundColor3 = Library.MainColor;
-                BackgroundTransparency = 0,3;
+                BackgroundTransparency = 0,5;
                 BorderColor3 = Library.OutlineColor;
                 BorderMode = Enum.BorderMode.Inset;
                 Size = UDim2.new(1, 0, 1, 0);
@@ -1457,12 +1457,12 @@ do
             local WindowBackground = Library:Create('ImageLabel', {
                 Name = "WindowBackground",
                 Image = Library.BackgroundImage,
-                ImageTransparency = 0.5,
+                ImageTransparency = 0.3,
                 BackgroundTransparency = 1,
                 ScaleType = Enum.ScaleType.Crop,
                 Position = UDim2.new(0, 0, 0, 0),
                 Size = UDim2.new(1, 0, 1, 0),
-                ZIndex = 7;
+                ZIndex = 1;
                 Parent = Inner;
             });
 

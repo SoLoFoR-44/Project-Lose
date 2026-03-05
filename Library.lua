@@ -3116,24 +3116,9 @@ function Library:CreateWindow(...)
         local LeftSide = Library:Create('ScrollingFrame', {
             BackgroundTransparency = 1;
             BorderSizePixel = 0;
-            Position = UDim2.new(0, 8 - 1, 0, 8 - 1);
-            Size = UDim2.new(1/3, -12 + 2, 0, 507 + 2);
+            Position = UDim2.new(0, 8, 0, 8);
+            Size = UDim2.new(0.333, -10, 0, 509); 
             CanvasSize = UDim2.new(0, 0, 0, 0);
-            BottomImage = '';
-            TopImage = '';
-            ScrollBarThickness = 0;
-            ZIndex = 2;
-            Parent = TabFrame;
-        });
-
-        local RightSide = Library:Create('ScrollingFrame', {
-            BackgroundTransparency = 1;
-            BorderSizePixel = 0;
-            Position = UDim2.new(2/3, 4, 0, 8 - 1);
-            Size = UDim2.new(1/3, -12 + 2, 0, 507 + 2);
-            CanvasSize = UDim2.new(0, 0, 0, 0);
-            BottomImage = '';
-            TopImage = '';
             ScrollBarThickness = 0;
             ZIndex = 2;
             Parent = TabFrame;
@@ -3142,15 +3127,24 @@ function Library:CreateWindow(...)
         local MiddleSide = Library:Create('ScrollingFrame', {
             BackgroundTransparency = 1;
             BorderSizePixel = 0;
-            Position = UDim2.new(1/3, 4, 0, 8 - 1);
-            Size = UDim2.new(1/3, -12 + 2, 0, 507 + 2);
+            Position = UDim2.new(0.333, 5, 0, 8); 
+            Size = UDim2.new(0.333, -10, 0, 509);
             CanvasSize = UDim2.new(0, 0, 0, 0);
-            BottomImage = '';
-            TopImage = '';
             ScrollBarThickness = 0;
             ZIndex = 2;
             Parent = TabFrame;
-        })
+        });
+
+        local RightSide = Library:Create('ScrollingFrame', {
+            BackgroundTransparency = 1;
+            BorderSizePixel = 0;
+            Position = UDim2.new(0.666, 2, 0, 8); 
+            Size = UDim2.new(0.333, -10, 0, 509);
+            CanvasSize = UDim2.new(0, 0, 0, 0);
+            ScrollBarThickness = 0;
+            ZIndex = 2;
+            Parent = TabFrame;
+        });
 
         Tab.LeftSide = LeftSide;
         Tab.MiddleSide = MiddleSide;

@@ -1860,9 +1860,14 @@ do
             Position = UDim2.new(1, 6, 0, 0);
             TextSize = 14;
             Text = Info.Text;
+            TextColor3 = Info.Risky and Library.RiskColor or Library.FontColor;
             TextXAlignment = Enum.TextXAlignment.Left;
             ZIndex = 6;
             Parent = ToggleInner;
+        });
+
+        Library:AddToRegistry(ToggleLabel, {
+            TextColor3 = Info.Risky and 'RiskColor' or 'FontColor';
         });
 
         Library:Create('UIListLayout', {
